@@ -332,7 +332,7 @@ export default function Index() {
                   {s.cta}
                   <Icon name="ArrowRight" size={16} />
                 </a>
-                <a href="https://t.me/hvoia67" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-body px-7 py-3.5 rounded-full transition-all hover:opacity-90" style={{ background: "#29a6e0", color: "white" }}>
+                <a href="https://t.me/hvoia24_online" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-body px-7 py-3.5 rounded-full transition-all hover:opacity-90" style={{ background: "#29a6e0", color: "white" }}>
                   <span>✈️</span> Написать в Telegram
                 </a>
               </div>
@@ -545,7 +545,7 @@ export default function Index() {
               </div>
 
               <a
-                href="https://t.me/hvoia67"
+                href="https://t.me/hvoia24_online"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 mt-8 px-6 py-3.5 rounded-2xl font-body font-semibold transition-all hover:opacity-90 hover:scale-105"
