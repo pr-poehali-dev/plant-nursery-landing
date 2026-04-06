@@ -136,6 +136,97 @@ function CartDrawer({ cart, onClose, onQty, onRemove }: {
   );
 }
 
+const SEND_ORDER_URL = "https://functions.poehali.dev/bbf58f7e-8bed-49df-90f5-bbad737bc98a";
+
+/* ─── Contact Form ─── */
+function ContactForm({ cart }: { cart: CartItem[] }) {
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim() || !phone.trim()) return;
+    setStatus('loading');
+    try {
+      const res = await fetch(SEND_ORDER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone, message, cart }),
+      });
+      if (res.ok) {
+        setStatus('success');
+        setName(''); setPhone(''); setMessage('');
+      } else {
+        setStatus('error');
+      }
+    } catch {
+      setStatus('error');
+    }
+  };
+
+  return (
+    <div className="rounded-3xl p-8 border" style={{ background: "rgba(255,255,255,0.05)", borderColor: "#2d6e2d" }}>
+      <h3 className="font-display text-2xl font-medium text-white mb-6">Оставить заявку</h3>
+      {status === 'success' ? (
+        <div className="flex flex-col items-center justify-center py-10 gap-4 text-center">
+          <span className="text-5xl">🌲</span>
+          <p className="font-display text-2xl text-white">Заявка отправлена!</p>
+          <p className="font-body text-sm" style={{ color: "#8fc98f" }}>Мы свяжемся с вами в ближайшее время</p>
+          <button onClick={() => setStatus('idle')} className="font-body text-xs underline mt-2" style={{ color: "#6a9a6a" }}>Отправить ещё одну</button>
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="font-body text-xs uppercase tracking-wider mb-2 block" style={{ color: "#8fc98f" }}>Ваше имя *</label>
+            <input
+              type="text" value={name} onChange={e => setName(e.target.value)}
+              placeholder="Иван Иванов" required
+              className="w-full border rounded-xl px-4 py-3 font-body text-white placeholder-green-900 focus:outline-none transition-colors"
+              style={{ background: "rgba(255,255,255,0.08)", borderColor: "#2d6e2d" }}
+            />
+          </div>
+          <div>
+            <label className="font-body text-xs uppercase tracking-wider mb-2 block" style={{ color: "#8fc98f" }}>Телефон *</label>
+            <input
+              type="tel" value={phone} onChange={e => setPhone(e.target.value)}
+              placeholder="+7 (___) ___-__-__" required
+              className="w-full border rounded-xl px-4 py-3 font-body text-white placeholder-green-900 focus:outline-none transition-colors"
+              style={{ background: "rgba(255,255,255,0.08)", borderColor: "#2d6e2d" }}
+            />
+          </div>
+          <div>
+            <label className="font-body text-xs uppercase tracking-wider mb-2 block" style={{ color: "#8fc98f" }}>Сообщение</label>
+            <textarea
+              rows={3} value={message} onChange={e => setMessage(e.target.value)}
+              placeholder="Интересуют ели 1–1.5 м для живой изгороди..."
+              className="w-full border rounded-xl px-4 py-3 font-body text-white placeholder-green-900 focus:outline-none transition-colors resize-none"
+              style={{ background: "rgba(255,255,255,0.08)", borderColor: "#2d6e2d" }}
+            />
+          </div>
+          {cart.length > 0 && (
+            <div className="text-xs rounded-xl p-3" style={{ background: "rgba(255,255,255,0.06)", color: "#8fc98f" }}>
+              🛒 В заявку будет включена корзина ({cart.reduce((s, i) => s + i.qty, 0)} позиций)
+            </div>
+          )}
+          {status === 'error' && (
+            <p className="text-xs text-red-400">Ошибка отправки. Проверьте подключение или позвоните нам.</p>
+          )}
+          <button
+            type="submit" disabled={status === 'loading'}
+            className="w-full font-body font-semibold py-4 rounded-xl transition-all text-base hover:opacity-90 disabled:opacity-60"
+            style={{ background: "#8fc98f", color: "#1c421c" }}
+          >
+            {status === 'loading' ? 'Отправляем...' : 'Отправить заявку'}
+          </button>
+          <p className="text-xs text-center" style={{ color: "#4a6a4a" }}>Ответим в течение часа в рабочее время</p>
+        </form>
+      )}
+    </div>
+  );
+}
+
 /* ─── Main ─── */
 export default function Index() {
   const [slide, setSlide] = useState(0);
@@ -454,28 +545,7 @@ export default function Index() {
               </div>
             </div>
 
-            <div className="rounded-3xl p-8 border" style={{ background: "rgba(255,255,255,0.05)", borderColor: "#2d6e2d" }}>
-              <h3 className="font-display text-2xl font-medium text-white mb-6">Оставить заявку</h3>
-              <div className="space-y-4">
-                {[
-                  { label: "Ваше имя", type: "text", placeholder: "Иван Иванов" },
-                  { label: "Телефон", type: "tel", placeholder: "+7 (___) ___-__-__" },
-                ].map(f => (
-                  <div key={f.label}>
-                    <label className="font-body text-xs uppercase tracking-wider mb-2 block" style={{ color: "#8fc98f" }}>{f.label}</label>
-                    <input type={f.type} placeholder={f.placeholder} className="w-full border rounded-xl px-4 py-3 font-body text-white placeholder-green-900 focus:outline-none transition-colors" style={{ background: "rgba(255,255,255,0.08)", borderColor: "#2d6e2d" }} />
-                  </div>
-                ))}
-                <div>
-                  <label className="font-body text-xs uppercase tracking-wider mb-2 block" style={{ color: "#8fc98f" }}>Сообщение</label>
-                  <textarea rows={3} placeholder="Интересуют ели 1–1.5 м для живой изгороди..." className="w-full border rounded-xl px-4 py-3 font-body text-white placeholder-green-900 focus:outline-none transition-colors resize-none" style={{ background: "rgba(255,255,255,0.08)", borderColor: "#2d6e2d" }} />
-                </div>
-                <button className="w-full font-body font-semibold py-4 rounded-xl transition-all text-base hover:opacity-90" style={{ background: "#8fc98f", color: "#1c421c" }}>
-                  Отправить заявку
-                </button>
-                <p className="text-xs text-center" style={{ color: "#4a6a4a" }}>Ответим в течение часа в рабочее время</p>
-              </div>
-            </div>
+            <ContactForm cart={cart} />
           </div>
         </div>
       </section>
