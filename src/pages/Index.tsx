@@ -436,7 +436,7 @@ export default function Index() {
               </p>
               <div className="space-y-5">
                 {[
-                  { icon: "Phone", label: "Телефон", value: "+7 (495) 123-45-67" },
+                  { icon: "Phone", label: "Телефон", value: "8 (920) 320-09-01" },
                   { icon: "Mail", label: "Email", value: "info@khvoya-nursery.ru" },
                   { icon: "MapPin", label: "Адрес", value: "Московская область, Дмитровский район" },
                   { icon: "Clock", label: "Режим работы", value: "Пн–Сб: 9:00–18:00" },
