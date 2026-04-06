@@ -332,8 +332,8 @@ export default function Index() {
                   {s.cta}
                   <Icon name="ArrowRight" size={16} />
                 </a>
-                <a href="#contacts" className="inline-flex items-center gap-2 border border-white/40 text-white hover:bg-white/10 font-body px-7 py-3.5 rounded-full transition-colors">
-                  Связаться
+                <a href="https://t.me/hvoia67" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-body px-7 py-3.5 rounded-full transition-all hover:opacity-90" style={{ background: "#29a6e0", color: "white" }}>
+                  <span>✈️</span> Написать в Telegram
                 </a>
               </div>
             </div>
@@ -543,6 +543,20 @@ export default function Index() {
                   </div>
                 ))}
               </div>
+
+              <a
+                href="https://t.me/hvoia67"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 mt-8 px-6 py-3.5 rounded-2xl font-body font-semibold transition-all hover:opacity-90 hover:scale-105"
+                style={{ background: "#29a6e0", color: "white" }}
+              >
+                <span className="text-xl">✈️</span>
+                <div>
+                  <p className="text-sm font-semibold leading-tight">Написать в Telegram</p>
+                  <p className="text-xs opacity-75 font-normal leading-tight">Ответим быстро!</p>
+                </div>
+              </a>
             </div>
 
             <ContactForm cart={cart} />
