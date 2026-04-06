@@ -29,7 +29,7 @@ const PLANTS: Plant[] = [
 ];
 
 const SLIDER_ITEMS = [
-  { title: "Питомник хвойных растений", subtitle: "С 2009 года выращиваем и продаём хвойные деревья и кустарники. Более 40 видов растений.", cta: "Смотреть каталог", bg: "from-[#1c421c] via-[#2d6e2d] to-[#3a8a3a]" },
+  { title: "Питомник хвойных растений", subtitle: "С 2024 года выращиваем и продаём хвойные деревья и кустарники. Более 40 видов растений.", cta: "Смотреть каталог", bg: "from-[#1c421c] via-[#2d6e2d] to-[#3a8a3a]" },
   { title: "Живые ели к Новому году", subtitle: "Натуральные ели с комом земли — дерево переживёт праздник и украсит ваш сад.", cta: "Заказать ель", bg: "from-[#163416] via-[#235523] to-[#2d6e2d]" },
   { title: "Профессиональное озеленение", subtitle: "Проектируем и высаживаем хвойные композиции для частных участков и коммерческих объектов.", cta: "Узнать подробнее", bg: "from-[#1a3a2a] via-[#2a5a3a] to-[#3a7a4a]" },
 ];
@@ -319,7 +319,7 @@ export default function Index() {
             <div className="max-w-2xl" style={{ animation: "fadeIn 0.7s ease both" }}>
               <div className="inline-flex items-center gap-2 text-white/80 text-sm px-4 py-1.5 rounded-full mb-6 font-body" style={{ background: "rgba(255,255,255,0.12)", backdropFilter: "blur(8px)" }}>
                 <span className="w-2 h-2 rounded-full bg-green-300 animate-pulse" />
-                Питомник работает с 2009 года
+                Питомник работает с 2024 года
               </div>
               <h1 className="font-display text-5xl sm:text-7xl font-light text-white leading-tight mb-6">
                 {s.title}
@@ -571,7 +571,7 @@ export default function Index() {
             <span className="text-xl">🌲</span>
             <span className="font-display text-xl" style={{ color: "#6a9a6a" }}>ХВОЯ</span>
           </div>
-          <p className="font-body text-xs" style={{ color: "#3a5a3a" }}>© 2009–2026 Питомник ХВОЯ. Все права защищены.</p>
+          <p className="font-body text-xs" style={{ color: "#3a5a3a" }}>© 2024–2026 Питомник ХВОЯ. Все права защищены.</p>
           <div className="flex gap-4">
             {[["#catalog", "Каталог"], ["#about", "О нас"], ["#contacts", "Контакты"]].map(([href, label]) => (
               <a key={href} href={href} className="font-body text-xs transition-colors hover:opacity-70" style={{ color: "#4a7a4a" }}>{label}</a>
